@@ -3,15 +3,23 @@
  * @return {string}
  * 题目：https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/submissions/
  */
- var a = 1;
+// var reverseWords = function(s) {
+//     var arr = s.split(" ");
+
+//     var res = arr.map((item) => {
+//     	return item.split("").reverse().join("");
+//     })
+
+//     return res.join(" ")
+// };
+/*
+ * 二次优化
+*/
 var reverseWords = function(s) {
-    var arr = s.split(" ");
-
-    var res = arr.map((item) => {
+    return s.split(" ").map((item) => {
     	return item.split("").reverse().join("");
-    })
-
-    return res.join(" ")
+    }).join(" ");
+    // 一种更加优雅的写法，减少了许多不必要的变量声明，节省了空间
 };
 
 // 关于export default 和 export 区别：https://www.jianshu.com/p/edaf43e9384f
@@ -55,7 +63,8 @@ var reverseWords = function(s) {
 //总结：
 /*
  * 1.export与export default均可用于导出常量、函数、文件、模块等
- * 2.在一个文件或模块中，export、import可以有多个，export default仅有一个
+ * 2.在一个文件或模块中，export、import可以有多个，export default仅有一个，也只能导出一个变量
+ * 	所以export和import的变量名需要一一对应，但是export default不需要，可以起任意变量名来接收
  * 3.通过export方式导出，在导入时要加{ }，export default则不需要
  * 4.export default可以先定义函数，后导出，而export只能在哪定义在哪导出
  * 5. 
