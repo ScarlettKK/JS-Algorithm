@@ -1,6 +1,7 @@
 # JS-Algorithm
 Some algorithms writing by JavaScript
 
+## How to start this program
 1. 安装
 
   ```
@@ -51,3 +52,23 @@ Some algorithms writing by JavaScript
 
   - IDE：Atom
   - 插件：[platformio-ide-terminal](https://github.com/platformio/platformio-atom-ide-terminal)
+
+## Documents
+### String
+#### 题目
+
+[reverse-words-in-a-string-iii](reverse-words-in-a-string-iii)
+
+<img src="https://img2018.cnblogs.com/blog/1147701/201902/1147701-20190222230828980-443269724.png">
+
+#### 解题思路
+
+<img src="https://img2018.cnblogs.com/blog/1147701/201902/1147701-20190222230819147-2020521009.png">
+
+要点：
+
+1.要对JS数组、字符串操作十分熟悉
+
+2.要善用已有的方法，不要临时造轮子
+
+3.面试官问别的解法，可能是让你换一种函数（或参数类型）来实现同样的效果，但解题思路不变，而不一定是推倒整个思路另辟蹊径
