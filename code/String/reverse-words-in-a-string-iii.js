@@ -15,11 +15,24 @@
 /*
  * 二次优化
 */
+// var reverseWords = function(s) {
+//     return s.split(" ").map((item) => {
+//     	return item.split("").reverse().join("");
+//     }).join(" ");
+//     // 一种更加优雅的写法，减少了许多不必要的变量声明，节省了空间
+// };
+/*
+ * 来自面试官的灵魂拷问：还有别的解法吗？
+*/
+// var reverseWords = function(s) {
+//     return s.split(/\s/g).map((item) => {// 这里为我们展示了split的另一种用法：传入正则表达式也可
+//     	return item.split("").reverse().join("");
+//     }).join(" ");
+// };
 var reverseWords = function(s) {
-    return s.split(" ").map((item) => {
+    return s.match(/[\w']+/g).map((item) => {// 这里为我们展示了match的用法，传入一个正则表达式
     	return item.split("").reverse().join("");
     }).join(" ");
-    // 一种更加优雅的写法，减少了许多不必要的变量声明，节省了空间
 };
 
 // 关于export default 和 export 区别：https://www.jianshu.com/p/edaf43e9384f
