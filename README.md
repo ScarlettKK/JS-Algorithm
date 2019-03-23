@@ -52,6 +52,10 @@ Some algorithms writing by JavaScript
 
   - IDE：Atom
   - 插件：[platformio-ide-terminal](https://github.com/platformio/platformio-atom-ide-terminal)
+  
+
+`参考资料: `[JS常用数组、字符串操作](https://www.cnblogs.com/luffa/p/10584585.html)
+
 
 ## Documents
 ### String
