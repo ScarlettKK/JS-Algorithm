@@ -52,6 +52,15 @@ Some algorithms writing by JavaScript
 
   - IDE：Atom
   - 插件：[platformio-ide-terminal](https://github.com/platformio/platformio-atom-ide-terminal)
+  
+
+`参考资料: `[JS常用数组、字符串操作](https://www.cnblogs.com/luffa/p/10584585.html)
+
+正则表达式：
+
+<img src="https://img2018.cnblogs.com/blog/1147701/201903/1147701-20190330224410659-1704551380.jpg">
+
+<img src="https://img2018.cnblogs.com/blog/1147701/201903/1147701-20190330224417679-1491776475.jpg">
 
 ## Documents
 ### String
