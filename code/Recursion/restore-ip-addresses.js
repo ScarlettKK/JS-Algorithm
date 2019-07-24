@@ -13,6 +13,7 @@ var restoreIpAddresses = function(s) {
     function spellAddress (ip, rem){
     	if(ip.length === 4 && rem.length === 0) {
     		let oneip = ip.join('.')
+    		// IP地址在实际应用中,应首位不为0,最后一位不为0或255,这里leetcode的题目没有作严谨要求
     		// if(parseInt(ip[0]) !== 0 && parseInt(ip[3]) !== 0 && parseInt(ip[3]) !== 255)
     		if(res.indexOf(oneip) < 0 && oneip.length === len+3)
     			res.push(oneip);
