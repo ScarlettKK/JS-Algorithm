@@ -4,7 +4,13 @@
  * @param {number} k
  */
 var MyCircularQueue = function(k) {
-    
+	// 用来保存数据长度为K的数据结构
+    this.list = Array(k);
+    // 记录队首队尾的指针
+    this.front = 0;
+    this.end = 0;
+    // 记录队列的长度
+    this.arrlen = k;
 };
 
 /**
@@ -13,7 +19,14 @@ var MyCircularQueue = function(k) {
  * @return {boolean}
  */
 MyCircularQueue.prototype.enQueue = function(value) {
-    
+    if(this.isFull()){
+    	return false;
+    } else {
+    	this.list[this.end] = value;
+    	// 循环队列,如果队列满了,尾指针要回到队首
+    	this.end = (this.end + 1) % this.arrlen;
+    	return true;
+    }
 };
 
 /**
@@ -21,7 +34,15 @@ MyCircularQueue.prototype.enQueue = function(value) {
  * @return {boolean}
  */
 MyCircularQueue.prototype.deQueue = function() {
-    
+	if(this.isEmpty()){
+    	return false;
+	} else {
+		let value = this.list[this.front];
+	    this.list[this.front] = null;
+	    // 循环队列,如果队列满了,首指针也要回到队首
+	    this.front = (this.front + 1) % this.arrlen;
+	    return true;
+	}
 };
 
 /**
@@ -29,7 +50,10 @@ MyCircularQueue.prototype.deQueue = function() {
  * @return {number}
  */
 MyCircularQueue.prototype.Front = function() {
-    
+    if(!this.isEmpty())
+    	return this.list[this.front]
+    else
+    	return -1
 };
 
 /**
@@ -37,7 +61,14 @@ MyCircularQueue.prototype.Front = function() {
  * @return {number}
  */
 MyCircularQueue.prototype.Rear = function() {
-    
+    if(!this.isEmpty()){
+    	if(this.end - 1 < 0)
+    		return this.list[this.arrlen - 1]
+    	else
+    		return this.list[this.end - 1]
+    }
+    else
+    	return -1
 };
 
 /**
@@ -45,7 +76,7 @@ MyCircularQueue.prototype.Rear = function() {
  * @return {boolean}
  */
 MyCircularQueue.prototype.isEmpty = function() {
-    
+    return this.front === this.end && !this.list[this.front]
 };
 
 /**
@@ -53,7 +84,7 @@ MyCircularQueue.prototype.isEmpty = function() {
  * @return {boolean}
  */
 MyCircularQueue.prototype.isFull = function() {
-    
+    return this.front === this.end && !!this.list[this.front]
 };
 
 /** 
