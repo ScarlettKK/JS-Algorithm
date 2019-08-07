@@ -16,6 +16,8 @@
  // 这里快速排序最为合适
  // 采用+in-place算法
 var sortList = function(head) {
+    if(head === null)
+        return head;
     // 交换链表两个元素的位置,只要交换他们的值即可,不需要交换指针位置
     function changePos(r, l){
     	let t = r.val;
@@ -24,8 +26,12 @@ var sortList = function(head) {
     }
 
     // 寻找基准元素的节点
+    // 基准元素的意思是: 左边比第一个元素大,右边比第一个元素小
+    // 这里采用了+in-place算法
     function partion(start, end) {
     	let flag = start.val;
+    	// 这里添加两个指针帮助递归
+    	// p是基准元素位置记录指针,q是遍历指针
     	let p = start, q = start.next;
     	while(q !== end) {
     		if(q.val < flag){
@@ -34,10 +40,12 @@ var sortList = function(head) {
     		}
     		q = q.next;
     	}
+    	// 最后交换位置
     	changePos(start, p)
     	return p;
     }
 
+    // 递归
     function sort(start, end){
     	if(start !== end) {
     		let mid = partion(start, end)
@@ -46,6 +54,7 @@ var sortList = function(head) {
     	}
     }
 
+    // 寻找尾指针位置
     let end = head;
     while(end.next !== null){
     	end = end.next;
@@ -53,7 +62,7 @@ var sortList = function(head) {
     end = end.next;
 
     sort(head, end);
-
+    
     return head;
 };
 
