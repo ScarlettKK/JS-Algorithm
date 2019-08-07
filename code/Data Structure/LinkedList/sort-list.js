@@ -4,32 +4,58 @@
  *     this.val = val;
  *     this.next = null;
  * }
- * 题目: https://leetcode-cn.com/problems/sort-list/
  */
 /**
  * @param {ListNode} head
  * @return {ListNode}
+ * 题目: https://leetcode-cn.com/problems/sort-list/
  */
-var sortList = function(head) {
-    function sort (arr) {
-		let len = arr.length;
-		if(len < 2)
-			return arr;
-		else {
-			// 将第一个元素当成flag位置,比flag大的放在右边,小的放在左边,以此类推
-			let flag = arr[0].val;
-			let left = [];
-			let right = [];
-			for(let i = 1; i < len; i++) {
-				if(arr[i].val < flag)
-					left.push(arr[i])
-				else
-					right.push(arr[i])
-			}
-			// 最后返回排序好的左边+flag+排序好的右边
-			return sort(left).concat(flag, sort(right));
-		}
-	}
 
-	return sort(nums);
+ // 要求:在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。 
+ // 链表三大山: 创建 排序 查环
+ // 这里快速排序最为合适
+ // 采用+in-place算法
+var sortList = function(head) {
+    // 交换链表两个元素的位置,只要交换他们的值即可,不需要交换指针位置
+    function changePos(r, l){
+    	let t = r.val;
+    	r.val = l.val;
+    	l.val = t;
+    }
+
+    // 寻找基准元素的节点
+    function partion(start, end) {
+    	let flag = start.val;
+    	let p = start, q = start.next;
+    	while(q !== end) {
+    		if(q.val < flag){
+    			p = p.next;
+    			changePos(p, q)
+    		}
+    		q = q.next;
+    	}
+    	changePos(start, p)
+    	return p;
+    }
+
+    function sort(start, end){
+    	if(start !== end) {
+    		let mid = partion(start, end)
+    		sort(start, mid)
+    		sort(mid.next, end)
+    	}
+    }
+
+    let end = head;
+    while(end.next !== null){
+    	end = end.next;
+    }
+    end = end.next;
+
+    sort(head, end);
+
+    return head;
 };
+
+
+
