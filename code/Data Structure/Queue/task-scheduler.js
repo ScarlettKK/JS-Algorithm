@@ -7,14 +7,3 @@
 var leastInterval = function(tasks, n) {
     
 };
-
-// let div = document.getElementById("div1")
-// for(let i=0; i < 10; i++){
-// 	let btn = document.createElement("BUTTON");
-// 	div.appendChild(btn);
-// 	div.addEventListener("click", function(){})
-// }
-
-// console.log(100)
-// alert(200)
-// console.log(300)
