@@ -175,7 +175,7 @@ var pattern = /s$/;
 
 ### 字符集
 
-`(x)` ()可以标记一个子表达式x的开始和结束位置, 并且在JS replace函数中, ()还可以起到匹配x, 并且将保存x在名为$1...$9的变量中的作用 
+`(x)` ()可以标记一个子表达式(子字符串)x的开始和结束位置, 并且在JS replace函数中, ()还可以起到匹配x, 并且将保存x在名为$1...$9的变量中的作用 
 
 ```javascript
 name = "Doe, John";
@@ -217,15 +217,36 @@ name.replace(/(\w+)\s*, \s*(\w+)/, "$2 $1");
 
 	什么是单词边界?
 
-	单词边界是存在于 \w\W 中间的一个没有实际空间的东西.
+	接下来我们来举一个例子:
 
-	通俗一点讲,如果存在字符\w和\W相邻,那么这两个字符之间就有单词边界
+	我们的正则目标如下: 匹配字符串“magic”
 
 ```javascript
-var str6 = "abc_d,123中文_d3=efg汉字a";
-var reg6 = /[\d\D]\b/g;        // 正则表达式的意思很简单,就是匹配所有右边存在单词边界的字符
-console.log(str6.match(reg6)); //["d", ",", "3", "文", "3", "=", "g", "字", "a"]
+	var s = "welcome to nowamagic this magic place!"
+    var regex = /(magic)/g;
+    s.replace(regex, 'cat')
+    // 匹配结果: "welcome to nowacat this cat place!"
 ```
+
+	但是，通常情况下，我们只希望匹配 magic ，而不希望匹配 nowamagic 中出现的 magic。
+
+	正则表达式中，可以在 字符 前加“\b”，来匹配 以 正则表达式中“\b”后面所跟的的字符 开头的 字符。
+
+```javascript
+	var s = "welcome to nowamagic this magic place!"
+	var regex2 = /\b(magic)/g;
+	s.replace(regex2, 'cat')
+	// 匹配结果: "welcome to nowamagic this cat place!"
+```
+
+	正则表达式中，可以在 字符 后加“\b”，来匹配 以 正则表达式中“\b”前面所跟的的字符 结尾的 字符。
+
+	如\bmagic\b，这个正则匹配，必须以m开头，以c为结尾的字符串。
+
+	由上面我们可以看到, 单词边界类似于一个英文单词的开头结尾的空格
+
+	未完待续...
+	
 --------------------------------------
 
 `\cX` 这里的X代表一个控制符，如/\cM/匹配Ctrl-M 
