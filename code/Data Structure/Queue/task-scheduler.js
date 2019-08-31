@@ -23,4 +23,75 @@ var leastInterval = function(tasks, n) {
 	    	  那么在第二轮分组的时候, A的顺序也一定在B任务前面, 
 	    	  因为A、B任务在第一轮中也就各执行了一次, 且A任务个数>=B任务个数, 所以不会出现B忽然跑到了A前面的情况
     */
+    var classifyTasks = {};
+    var len = tasks.length;
+    // 分类所有的任务, 并且统计每种任务的个数
+    for(let i=0; i < len; i++){
+        if(!classifyTasks[tasks[i]]){
+            classifyTasks[tasks[i]] = 1;
+        } else {
+            classifyTasks[tasks[i]] ++;
+        }
+    }
+
+    // 储存最后的任务调度结果
+    var res = [];
+
+    while(tasks.length > 0){
+        // 深拷贝一份classifyTasks
+        let obj = JSON.parse(JSON.stringify(classifyTasks));
+        // 规定n+1为一组, n是冷却时间, 我们需要保证冷却时间内不会有相同的任务
+        for(let i=0; i < n+1; i++){
+            // 从现有的每类任务中, 找出未处理数最大的任务优先安排
+            let max = findMax(obj)
+            // 也要注意空任务的情况, 需要补齐冷却时间
+            if(!max) {
+                res.push('-')
+            } else {
+                // 优先安排未处理数最大的任务
+                res.push(max);
+                // 该任务计数减一
+                classifyTasks[max] --;
+                // 已经安排过的任务在这一组中我们不会再考虑
+                delete obj[max];
+                // 因为已经安排过一个任务,我们随意pop出tasks中的一个任务,为的是减少长度
+                tasks.pop()
+            }
+        }
+    }
+    
+    // 注意需要去掉最后一个分组的 空任务, 因为最后一个分组做完后就完成了, 不需要再添加冷却时间
+    var l = res.length;
+    while(res[res.length-1] === '-'){
+        res.pop()
+    }
+    
+    // 返回结果
+    return res.length;
+
+
+    // 找出当前未处理数最大的任务优先安排
+    function findMax(obj){
+        let res;
+        let max = 0;
+        for (let key in obj) {
+            if(obj[key] > max){
+                max = obj[key];
+                res = key;
+            }
+        }
+        if(max > 0)
+            return res;
+        else
+            return undefined;
+    }
 };
+
+
+
+
+
+
+
+
+
