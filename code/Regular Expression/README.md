@@ -265,13 +265,43 @@ name.replace(/(\w+)\s*, \s*(\w+)/, "$2 $1");
 
 在 JavaScript 中，RegExp 对象是一个预定义了属性和方法的正则表达式对象。
 
+RegExp对象具有以下属性和方法:
+
+<img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g6xp1zhihlj318a0u0tdo.jpg">
+
+exec() 方法 用于检索字符串中的正则表达式的匹配
+
+test() 方法 用于检测一个字符串是否匹配某个模式
+
 ### 应用正则的字符串方法
 
-在 JavaScript 中，正则表达式通常用于两个字符串方法 : search() 和 replace()。
+在 JavaScript 中，正则表达式可以应用于以下几个字符串方法 : search()、replace()、split()、match()
 
 search() 方法 用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串，并返回子串的起始位置。
 
 replace() 方法 用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
+
+```javascript
+	// 将string内含有arr中任一字符串的部分,标记成为高亮
+	reg = new RegExp('(' + arr.join('|') + ')', 'g')
+	string = string.replace(reg, '<span style="color:red">$&</span>')
+```
+
+split() 方法 用于把一个字符串分割成字符串数组。
+
+```javascript
+	// 将字符串以|或者;分开
+	string.split(/[|;]/)
+
+	// 将字符串以||分开
+	string.split(/\|{2}/)
+```
+
+match() 方法 可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。该方法类似 indexOf() 和 lastIndexOf()，但是它返回指定的值，而不是字符串的位置。
+
+
+
+
 
 
 
