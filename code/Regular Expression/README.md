@@ -271,13 +271,44 @@ RegExp对象具有以下属性和方法:
 
 exec() 方法 用于检索字符串中的正则表达式的匹配
 
+```javascript
+	// 在本例中，我们将全局检索字符串中的 W3School
+	var str = "Visit W3School"; 
+	var patt = new RegExp("W3School","g");
+	var result;
+
+	while ((result = patt.exec(str)) != null)  {
+	  console.log(result);         // W3School
+	  console.log(patt.lastIndex); // 14
+	 }
+```
+
+	重要事项：如果在一个字符串中完成了一次模式匹配之后要开始检索新的字符串，就必须手动地把 lastIndex 属性重置为 0。
+	提示：请注意，无论 RegExpObject 是否是全局模式，exec() 都会把完整的细节添加到它返回的数组中。这就是 exec() 与 String.match() 的不同之处，后者在全局模式下返回的信息要少得多。因此我们可以这么说，在循环中反复地调用 exec() 方法是唯一一种获得全局模式的完整模式匹配信息的方法。
+
 test() 方法 用于检测一个字符串是否匹配某个模式
+
+```javascript
+	// 在下面的例子中，我们将检索 "W3School"
+	var str = "Visit W3School";
+	var patt1 = new RegExp("W3School");
+
+	var result = patt1.test(str);
+
+	console.log("Result: " + result); // Result: true
+```
 
 ### 应用正则的字符串方法
 
 在 JavaScript 中，正则表达式可以应用于以下几个字符串方法 : search()、replace()、split()、match()
 
 search() 方法 用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串，并返回子串的起始位置。
+
+```javascript
+	// 在本例中，我们将执行一次忽略大小写的检索
+	var str="Visit W3School!"
+	console.log(str.search(/w3school/i)) // 6
+```
 
 replace() 方法 用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
 
@@ -299,6 +330,11 @@ split() 方法 用于把一个字符串分割成字符串数组。
 
 match() 方法 可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。该方法类似 indexOf() 和 lastIndexOf()，但是它返回指定的值，而不是字符串的位置。
 
+```javascript
+	// 在本例中，我们将使用全局匹配的正则表达式来检索字符串中的所有数字
+	var str="1 plus 2 equal 3"
+	console.log(str.match(/\d+/g)) // 1,2,3
+```
 
 
 
