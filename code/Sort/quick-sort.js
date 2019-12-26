@@ -1,3 +1,27 @@
+
+// 既然递归是一个反复调用自身的过程，这就说明它每一级的功能都是一样的，因此我们只需要关注一级递归的解决过程即可。
+// 我们需要关心的主要是以下三点：
+
+// 	整个递归的终止条件。
+
+// 	一级递归需要做什么？
+
+// 	***应该返回给上一级的返回值是什么？***
+
+// 因此，也就有了我们解递归题的三部曲：
+
+// 	找整个递归的终止条件：递归应该在什么时候结束？
+
+// 	***找返回值：应该给上一级返回什么信息？***
+
+// 	本级递归应该做什么：在这一级递归中，应该完成什么任务？
+
+
+// ********** 递归调用时候的假设: 返回值是对的,且已经排序好的 ************
+// 快排: 操作A:(将第一个元素当成flag位置,比flag大的放在右边,小的放在左边)再分别对右边区域、左边区域进行操作A,以此类推
+// 归并: 操作B:(将数组分割成两半,分别将这两半进行操作B使其内部有序,再将这两半有序结合)
+
+
 /**
  * @param {number[]} A
  * @return {number[]}
@@ -75,3 +99,54 @@ var quickSort = function(nums) {
 
 	return nums
 };
+
+
+// 归并
+function mergeSort(arr){
+	var len = arr.length;
+	// 终止条件
+	if(len < 2)
+		return arr;
+
+	// 拿到排序好的左边
+	var left = mergeSort(arr.slice(0, Math.floor(len/2)));
+	// 拿到排序好的右边
+	var right = mergeSort(arr.splice(Math.floor(len/2)));
+
+	// 左边右边有顺序地拼接起来
+	return merge(left, right)
+	// 或者这么写: return merge(mergeSort(arr.slice(0, Math.floor(len/2))), mergeSort(arr.splice(Math.floor(len/2))))
+}
+
+function merge(left,right){
+	var res = [];
+	while(left.length > 0 && right.length > 0){
+		if(left[0] > right[0]){
+			res.push(right[0])
+			right.splice(0,1)
+		} else {
+			res.push(left[0])
+			left.splice(0,1)
+		}
+	}
+	return res.concat(left, right)
+}
+
+
+// 冒泡
+function boble(arr){
+	var len = arr.length;
+	// 第一层循环(标志找到最大的第几位, 0为1)
+	for(let i=0; i<len; i++){
+		// 第二层循环, 每次找前面的最大值放在最后面(所以到倒数第二位循环截止)
+		for(let j=0; j<len-i-1; j++){
+			// 交换位置
+			if(arr[j] > arr[j+1]){
+				var t = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = t;
+			}
+		}
+	}
+	return arr;
+}
